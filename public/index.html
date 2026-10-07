@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page scale properly on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Six Vegetables</title>
+
+  <!-- PWA bits: colour of the browser bar, the manifest, and icons -->
+  <meta name="theme-color" content="#1f4d2b">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.svg">
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Top bar: site name + the 6-page menu (links are filled in by app.js) -->
+  <header class="bar">
+    <a class="brand" href="#carrot">Six Vegetables</a>
+    <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav id="menu" class="menu" aria-label="Vegetables"></nav>
+  </header>
+
+  <!-- app.js draws the selected vegetable page in here -->
+  <main id="view" tabindex="-1"></main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

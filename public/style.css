@@ -1,0 +1,71 @@
+/* ---- Design tokens. --accent is changed per page by app.js ---- */
+:root {
+  --ink: #17261b;      /* text */
+  --paper: #f2f5ee;    /* page background */
+  --card: #ffffff;     /* comment and form backgrounds */
+  --leaf: #1f4d2b;     /* top bar */
+  --accent: #e8742a;   /* current vegetable's colour */
+  --muted: #5b6b5f;
+  --head: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;  /* headings, UI */
+  --body: Georgia, "Times New Roman", serif;                  /* article text */
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 4.5rem; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.65 var(--body); }
+
+/* ---- Top bar and menu ---- */
+.bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: .5rem 1rem; padding: .7rem 1.1rem; background: var(--leaf); color: #fff; }
+.brand { font: 700 1.1rem var(--head); color: #fff; text-decoration: none; }
+.menu-btn { display: none; font: 600 .95rem var(--head); background: transparent; color: #fff;
+  border: 2px solid #fff; border-radius: 6px; padding: .35rem .8rem; }
+.menu { display: flex; gap: .3rem; flex-wrap: wrap; }
+.menu a { font: 600 .95rem var(--head); color: #fff; text-decoration: none; padding: .35rem .75rem; border-radius: 999px; }
+.menu a:hover { background: rgba(255,255,255,.18); }
+.menu a[aria-current="page"] { background: #fff; color: var(--leaf); }  /* highlights the current page */
+
+/* Visible keyboard focus for accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid #ffd23f; outline-offset: 2px; }
+
+/* ---- Page layout ---- */
+main { max-width: 46rem; margin: 0 auto; padding: 0 1.1rem 4rem; outline: none; }
+.hero { margin: 0 -1.1rem; padding: 3rem 1.1rem 2rem; background: var(--accent); color: #fff; }
+.hero h1 { margin: 0; font: 800 clamp(3rem, 14vw, 5.5rem)/1 var(--head); letter-spacing: -.03em; }
+.hero p { margin: .6rem 0 0; font: 600 1.05rem var(--head); opacity: .95; }
+article { padding: 1.8rem 0 1rem; }
+article p { max-width: 38rem; margin: 0 0 1rem; }
+.facts { margin: 1.2rem 0 0; padding: 1rem 1.2rem; border-left: 6px solid var(--accent); background: var(--card); }
+.facts b { font-family: var(--head); }
+h2 { font: 700 1.4rem var(--head); margin: 2rem 0 .8rem; }
+
+/* ---- Comment form ---- */
+form { display: grid; gap: .8rem; background: var(--card); padding: 1.2rem; border-radius: 10px; border: 2px solid var(--ink); }
+label { font: 600 .95rem var(--head); display: grid; gap: .25rem; }
+input, textarea { font: inherit; padding: .6rem .7rem; border: 2px solid #9aa89d; border-radius: 6px;
+  background: #fff; color: var(--ink); width: 100%; }
+textarea { min-height: 6rem; resize: vertical; }
+button.post { justify-self: start; font: 700 1rem var(--head); background: var(--ink); color: #fff;
+  border: 0; border-radius: 6px; padding: .7rem 1.4rem; cursor: pointer; }
+button.post:disabled { opacity: .5; cursor: wait; }
+.status { min-height: 1.4rem; margin: 0; font: 600 .95rem var(--head); }
+.status.err { color: #b3261e; }
+.status.ok { color: var(--leaf); }
+
+/* ---- Posted comments ---- */
+.comments { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: .8rem; }
+.comments li { background: var(--card); padding: .9rem 1.1rem; border-radius: 8px; border-left: 6px solid var(--accent); }
+.comments .who { font: 700 .95rem var(--head); }
+.comments time { font: .85rem var(--head); color: var(--muted); margin-left: .5rem; }
+.comments p { margin: .3rem 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.empty { color: var(--muted); font-style: italic; }
+
+/* ---- Phones: menu collapses behind the Menu button ---- */
+@media (max-width: 720px) {
+  .menu-btn { display: block; }
+  .menu { display: none; width: 100%; flex-direction: column; }
+  .menu.open { display: flex; }
+}
+
+/* One small entrance animation, skipped for people who prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) { .hero h1 { animation: rise .5s ease-out; } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
